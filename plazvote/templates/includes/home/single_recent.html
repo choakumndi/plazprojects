@@ -1,6 +1,6 @@
 
-{% load pages_tags mezzanine_tags i18n contest_tags staticfiles %}
-{% contest_recent_posts 5 as recent_contests %}
+{% load pages_tags mezzanine_tags i18n blog_tags contest_tags staticfiles %}
+{% blog_recent_posts 5 as recent_contests %}
 {% for recent in recent_contests %}
 <div class="single-blog-slide">
     <div class="images">

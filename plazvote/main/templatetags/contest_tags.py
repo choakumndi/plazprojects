@@ -7,7 +7,7 @@ from django.utils import timezone
 
 from mezzanine.generic.models import Keyword
 from mezzanine import template
-import functools
+from main.models import DisplayedProduct
 
 User = get_user_model()
 
@@ -82,11 +82,12 @@ def quick_home_contest(obj):
     context["page_object"] = obj
     return context.flatten()
     
-@register.inclusion_tag('includes/home/shop_item_list.html')
-def quick_shop_tag(obj):
+@register.inclusion_tag('includes/home/shop_item_list.html', takes_context=True)
+def quick_shop_tag(context):
     """
     A.
     """
-    context = {}
-    context["shop_details"] = obj.shopping
-    return context
+    # context = {}
+    products = DisplayedProduct.objects.all()
+    context["shop_details"] = products
+    return context.flatten()

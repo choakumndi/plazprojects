@@ -1,6 +1,6 @@
 
 {% load pages_tags mezzanine_tags i18n contest_tags staticfiles %}
-{% for details in shop_details.all %}  
+{% for details in shop_details %}  
 <div class="single-winners">
     <div class="images">
         <a href="#"><img src="static/media/{% thumbnail details.image 280 320 %}" alt=""/></a>
@@ -14,7 +14,7 @@
             </div>
         </div>
     </div>
-    <h3><a href="{{details.link.slug}}" target="__bank">{{details.link}}</a></h3>
+    <h3><a href="{{details.slug}}" target="__bank">{{details.title}}</a></h3>
     <div class="price-details">
         <ul>
             <li>
