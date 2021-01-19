@@ -1,0 +1,26 @@
+
+{% load i18n mezzanine_tags contest_tags keyword_tags disqus_tags %}
+
+{% for contest_post in contest_posts.object_list %}
+<li>
+    <div class="item">
+        <div class="about-image">
+            <a href="{{ contest_post.get_absolute_url }}">
+                <img class="img-thumbnail pull-left" src="{{ MEDIA_URL }}{% thumbnail contest_post.featured_image 370 270 %}">
+            </a>
+            <div class="overley">
+                <h4><a href="{{ contest_post.get_absolute_url }}">{{ contest_post.title|truncatechars:25 }}</a></h4>
+            </div>
+        </div>
+        <div class="about-text">
+            <h3><a href="single-contest1.html">{{ contest_post.title|truncatechars:25 }}</a></h3>
+            <p>{{ contest_post.description_from_content|safe |truncatechars:100 }}</p>
+            <div class="countdown-section">
+                <div class="row">
+                    <div class="col-sm-11"><div class="CountDownTimer" data-date="{{ contest_post.voting_date }}"></div></div>
+                    </div>
+            </div>
+            <a class="radius-0" href="single-contest1.html">{{ contest_post.voting_date|join_or_vote }}<i class="fa fa-angle-right"></i></a>
+        </div>  
+    </div>                                  
+</li>

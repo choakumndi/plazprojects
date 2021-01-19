@@ -1,0 +1,169 @@
+{% load pages_tags mezzanine_tags i18n staticfiles %}
+        {% compress css %}
+        <!-- bootstrap v3.3.6 css -->
+        <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+        <!-- font-awesome css -->
+        <link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.min.css' %}">
+        <!-- animate css -->
+        <link rel="stylesheet" type="text/css" href="{% static 'css/animate.css' %}">
+        <!-- jquery-ui.min css -->
+        <link rel="stylesheet" type="text/css" href="{% static 'css/jquery-ui.min.css' %}">
+        <!-- meanmenu css -->
+        <link rel="stylesheet" type="text/css" href="{% static 'css/meanmenu.min.css' %}">
+        <!-- owl.carousel css -->
+        <link rel="stylesheet" type="text/css" href="{% static 'css/owl.carousel.css' %}">
+        <!-- nivo slider CSS -->
+        <link rel="stylesheet" type="text/css" href="{% static 'css/nivo-slider.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/preview.css' %}">
+        <!-- lightbox css -->
+        <link rel="stylesheet" type="text/css" href="{% static 'css/lightbox.min.css' %}">
+		<!-- TimeCircles css -->
+        <link rel="stylesheet" type="text/css" href="{% static 'css/TimeCircles.css' %}">
+        <!-- style css -->
+        <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+        <!-- responsive css -->
+        <link rel="stylesheet" type="text/css" href="{% static 'css/responsive.css' %}">
+        {% block extra_css %}
+        <style type="text/css">  
+/* ------------------------------------
+Shop Now Button start Here
+--------------------------------------*/
+.top-right .top-btn {
+    color: #ffffff;
+    padding: 14px 12px 14px 12px;
+    background-color: rgb(20, 20, 51);
+}
+/* ------------------------------------
+14.Inner Page Header serction start Here
+--------------------------------------*/
+.inner-page-header {
+  background: url({% static 'images/banner/2.jpg' %}) no-repeat;
+  padding: 200px 0 113px 0;
+  background-position: center center;
+  background-size: cover;
+}
+.inner-page-header .header-page-title h2 {
+  color: #ffffff;
+  margin: 0;
+  font-size: 36px;
+}
+.inner-page-header .header-page-locator ul {
+  text-align: right;
+}
+.inner-page-header .header-page-locator ul li {
+  display: inline-block;
+  color: #40916C;
+}
+.inner-page-header .header-page-locator ul li a {
+  color: #ffffff;
+  transition: all 0.5s ease 0s;
+}
+.inner-page-header .header-page-locator ul li a:hover {
+  color: #40916C;
+}
+                  .logo{
+		  font-size: 9.5rem;
+	    text-align: center;
+	    color: #d8f3dcff;
+	   	font-family: 'Niconne', cursive;
+	    font-weight: 900;
+      text-shadow: 5px 5px 0px #40916cff, 
+                  10px 10px 0px #1b4332ff, 
+                  15px 15px 0px #1b4332ff, 
+                  20px 20px 0px #74c69dff, 
+                  25px 25px 0px #052939, 
+                  30px 30px 0px #233359, 
+                  35px 35px 0px #141433, 
+                  40px 40px 0px #40916C, 
+                  45px 45px 0px #0f010f;
+}
+
+            .template-preloader-rapper h1 {
+            margin: 0;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+            font-family: ‘Arial Narrow’, sans-serif;
+            font-weight: 100;
+            font-size: 1.3em;
+            color: #FFFFFF;
+            text-align: center;
+            }
+
+           .template-preloader-rapper h1 span {
+            position: relative;
+            top: 0.63em;  
+            display: inline-block;
+            text-transform: uppercase;  
+            opacity: 0;
+            transform: rotateX(-90deg);
+            }
+
+            .let1 {
+            animation: drop 0.99s ease-in-out infinite;
+            animation-delay: 1.1s;
+            }
+
+            .let2 {
+            animation: drop 0.99s ease-in-out infinite;
+            animation-delay: 1.2s;
+            }
+
+            .let3 {
+            animation: drop 0.99s ease-in-out infinite;
+            animation-delay: 1.3s;
+            }
+
+            .let4 {
+            animation: drop 0.99s ease-in-out infinite;
+            animation-delay: 1.4s;
+
+            }
+
+            .let5 {
+            animation: drop 0.99s ease-in-out infinite;
+            animation-delay: 1.5s;
+            }
+
+            .let6 {
+            animation: drop 0.99s ease-in-out infinite;
+            animation-delay: 1.6s;
+            }
+
+            .let7 {
+            animation: drop 0.99s ease-in-out infinite;
+            animation-delay: 1.7s;
+            }
+
+            .let8 {
+            animation: drop 0.99s ease-in-out infinite;
+            animation-delay: 1.8s;
+            }
+
+            @keyframes drop {
+                10% {
+                    opacity: 0.5;
+                }
+                20% {
+                    opacity: 1;
+                    top: 3.78em;
+                    transform: rotateX(-360deg);
+                }
+                80% {
+                    opacity: 1;
+                    top: 3.78em;
+                    transform: rotateX(-360deg);
+                }
+                90% {
+                    opacity: 0.5;
+                }
+                100% {
+                    opacity: 0;
+                    top: 6.94em
+                }
+            }
+        </style>
+        {% endblock %}
+        {% endcompress %}

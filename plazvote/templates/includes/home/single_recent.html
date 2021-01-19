@@ -1,0 +1,30 @@
+
+{% load pages_tags mezzanine_tags i18n contest_tags staticfiles %}
+{% contest_recent_posts 5 as recent_contests %}
+{% for recent in recent_contests %}
+<div class="single-blog-slide">
+    <div class="images">
+        <a href="single-blog.html"><img src="{% static 'images/blog/1.jpg' %}" alt=""></a>
+        <span>04 <br/>May</span>
+        <div class="overley">
+            <ul>
+                <li><a href="single-html.html"><i class="fa fa-eye"></i></a></li>
+                <li><a href="images/blog/1.jpg' %}" data-lightbox="example-set" data-title="Image Title"><i class="fa fa-search"></i></a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="blog-informations">
+        <ul>
+            <li><i class="fa fa-user"></i> By Admin</li>
+            <!-- <li><i class="fa fa-comments"></i> 2 Comments</li> -->
+        </ul>
+        <div class="blog-details">
+            <h3><a href="single-blog.html">Loking After Our Photo Contest</a></h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem eligendi culpa modi omnis quos voluptatibus.</p>
+            <div class="read-more">
+                <a href="single-blog.html">Read More</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}

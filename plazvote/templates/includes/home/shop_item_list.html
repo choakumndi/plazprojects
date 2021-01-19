@@ -1,0 +1,25 @@
+
+{% load pages_tags mezzanine_tags i18n contest_tags staticfiles %}
+{% for details in shop_details.all %}  
+<div class="single-winners">
+    <div class="images">
+        <a href="#"><img src="static/media/{% thumbnail details.image 280 320 %}" alt=""/></a>
+        <div class="overley">
+            <div class="winners-details">
+                <ul class="product-info">
+                    <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                    <li><a href="#"><i class="fa fa-heart-o"></i></a></li>
+                    <li><a href="#"><i class="fa fa-compress"></i></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <h3><a href="{{details.link.slug}}" target="__bank">{{details.link}}</a></h3>
+    <div class="price-details">
+        <ul>
+            <li>
+                <del>${{details.discount_price}} </del> ${{details.product_price}}</li>
+        </ul>
+    </div>
+</div>
+{% endfor %}

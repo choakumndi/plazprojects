@@ -1,0 +1,38 @@
+{% load pages_tags mezzanine_tags i18n staticfiles %}
+            <div class="header-middle-area" id="sticky">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-2 col-md-2 col-sm-12">
+                            <div class="logo-area">
+                                <a href="/"><img src="{{STATIC_URL}}images/logo.png" alt=""></a>
+                            </div>
+                        </div>
+                        <div class="col-lg-9 col-md-9 col-sm-12">
+                            <div class="main-menu">
+                                {% page_menu "pages/menus/mobile.html" %}
+                            </div>
+                        </div>
+                        <div class="col-lg-1 col-md-1 col-sm-12">
+                            <div class="cart-area">
+                                <a href="cart.html"><i class="fa fa-shopping-basket"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Slide Menu Section Start Here -->
+            <div class="mobile-menu-area">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="mobile-menu">
+                                <nav id="dropdown">
+                                    {% page_menu "pages/menus/mobile.html" %}
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            

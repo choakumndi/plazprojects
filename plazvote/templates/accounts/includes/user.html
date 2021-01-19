@@ -1,0 +1,12 @@
+
+    <img src="images/resources/admin.jpg" alt="">
+    <span class="status f-online"></span>
+    <div class="user-setting">
+        {% url "profile" request.user.username as profile_url %}
+        <a href="{{ profile_url }}" title=""><i class="ti-user"></i> view profile</a>
+        {% url "profile_update" as profile_update_url %}
+        <a href="{{profile_update_url}}" title=""><i class="ti-pencil-alt"></i>edit profile</a>
+        <a href="#" title=""><i class="ti-settings"></i>account setting</a>
+        {% url "logout" as logout_url %}
+        <a href="{{logout_url}}" title=""><i class="ti-power-off"></i>log out</a>
+    </div>

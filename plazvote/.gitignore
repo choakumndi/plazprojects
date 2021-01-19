@@ -1,0 +1,8 @@
+*.pyc
+*.pyo
+*.db
+.DS_Store
+.coverage
+4.html
+mbase.html
+login_or_register.html

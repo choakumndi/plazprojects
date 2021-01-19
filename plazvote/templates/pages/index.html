@@ -1,0 +1,565 @@
+{% extends "pages/richtextpage.html" %}
+
+{% load pages_tags mezzanine_tags i18n contest_tags staticfiles %}
+{% block extra_css %}
+<style>
+
+/*==================
+1.5. Section-Colors-&-Backgrounds
+====================*/
+
+.bg-light-white {
+	background-color: #f4f4f4;
+}
+.bg-light-theme {
+	background-color: #fbfbfc;
+}
+.bg-theme-primary {
+	background-color: #f8f7f5;
+}
+.bg-light-green {
+	background-color: #141433;
+}
+.bg-red {
+	background-color: #ff0000;
+}
+.bg-gradient-red {
+	background-image: linear-gradient(to right, #f20000, #a20000);
+}
+.bg-yellow {
+	background-color: #ffc000;
+}
+.bg-green {
+	background-color: #4aa110;
+}
+.bg-gradient-green {
+	background-image: linear-gradient(to bottom, #499a14, #476d2d);
+}
+.bg-gradient-orange {
+	background-image: linear-gradient(to bottom, #c55a11, #ed7d31);
+}
+.bg-black {
+	background-color: #000;
+}
+.bg-custom-1{
+	background-color: #141433;
+}
+.bg-custom-2{
+	background-color: #233359;
+}
+.bg-custom-3{
+	background-color: #2E3F6A;
+}
+.bg-custom-4{
+	background-color: #40916C;
+}
+/*Colors*/
+
+.text-light-black {
+	color: #000000de;
+}
+.text-orange {
+	color: #fb6100;
+}
+.text-custom-white {
+	color: #ffffff;
+}
+.text-light-white {
+	color: #6b6b83;
+}
+.text-dark-red {
+	color: #141433;
+}
+.text-dark-white {
+	color: #00000059;
+}
+.text-yellow {
+	color: #fcb71b;
+}
+.text-light-green {
+	color: #141433;
+}
+.text-success {
+	color: #13aa37;
+}
+/* Services box */
+
+.service-box {
+	padding: 80px 0;
+}
+.service-box-wrapper {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	max-width: 300px;
+	margin: 0 auto;
+}
+.service-box-wrapper .service-icon-box {
+	width: 80px;
+	height: 80px;
+	border: 1px solid #fff;
+	border-radius: 50%;
+	margin-right: 15px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: #667A62;
+	font-size: 35px;
+	transition: 0.5s all;
+}
+.service-box-wrapper .service-icon-box img {
+	width: 40px;
+	height: 40px;
+}
+.service-box:hover .service-box-wrapper .service-icon-box{
+	transform: translateY(-10px);
+}
+.service-text-box h6 {
+	font-size: 18px;
+	font-weight: 400;
+	margin-bottom: 0;
+}
+.service-text-box p,
+.service-text-box h6 {
+	color: #ffffff;
+}
+.border-custom-right {
+	border-right: 1px solid #141433;
+}
+.bg-custom-primary {
+	background-color: #ba1c24;
+}
+.bg-custom-secondary {
+	background-color: #141433;
+}
+.text-color-primary {
+	color: #ba1c24;
+}
+.text-color-secondary {
+	color: #141433;
+}
+</style>
+{% endblock extra_css %}
+
+{% block all_content %}
+{% with home=page.homepage %}
+{% if home.adslides %}
+{% block banner %}
+<!-- Slider Area Start Here-->
+<section>
+
+<div class="slider-area">
+    <div class="bend niceties preview-2">
+        <div id="ensign-nivoslider" class="slides">
+            {% for slide in home.adslides.all %}
+            {{slide.link.title}}
+           <img src="{{ MEDIA_URL }}{% thumbnail slide.image 1920 1000 %}" alt="" title="#slider-direction-{{slide.id}}" />
+            {% endfor %}                  
+            </div>
+        <!-- direction 2 -->
+            {% for slide in home.adslides.all %}
+        <div id="slider-direction-{{slide.id}}" class="slider-direction">
+            <div class="slider-content t-cn s-tb slider-1">
+                <div class="title-container s-tb-c">
+                    <h1 class="title1 uppercase"><span>
+                        {{slide.link.title}}</span>{{slide.ad_sloggan}} </h1>
+                    <div class="slider-botton">
+                        <ul>
+                            <li class="active"><a class="radius-0" href="{{slide.link.slug}}" target="__bank">More Details <i class="fa fa-angle-right"></i></a></li>
+                            
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+       {% endfor %}   
+    </div>
+</div>
+</section>
+<section class="service-type">
+    <div class="row">
+        <div class="col-lg-3 col-md-6 bg-custom-1 border-custom-right border-sm-bottom">
+            <div class="service-box">
+                <div class="service-box-wrapper">
+                    <div class="service-icon-box">
+                        <img src="{{ STATIC_URL }}images/icons/cash.svg" alt="" class="img-fluid">
+                    </div>
+                    <div class="service-text-box">
+                        <p>Be a Part</p>
+                        <h6>As an Organiser</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 bg-custom-2 border-custom-right border-sm-bottom">
+            <div class="service-box">
+                <div class="service-box-wrapper">
+                    <div class="service-icon-box">
+                        <img src="{{ STATIC_URL }}images/icons/help.svg" alt="" class="img-fluid">
+                    </div>
+                    <div class="service-text-box">
+                        <p>Be a Part</p>
+                        <h6>As a Participant</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 bg-custom-3 border-custom-right border-sm-bottom">
+            <div class="service-box">
+                <div class="service-box-wrapper">
+                    <div class="service-icon-box">
+                        <img src="{{ STATIC_URL }}images/icons/investor.svg" alt="" class="img-fluid">
+                    </div>
+                    <div class="service-text-box">
+                        <p>Participate</p>
+                        <h6>As a Voter</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 bg-custom-4">
+            <div class="service-box">
+                <div class="service-box-wrapper">
+                    <div class="service-icon-box text-custom-white">
+                        <img src="{{ STATIC_URL }}images/icons/shopping-bags.svg" alt="" class="img-fluid text-custom-white">
+                    </div>
+                    <div class="service-text-box">
+                        <p>Discounts</p>
+                        <h6>Shop Now</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Slider Area End Here-->
+{% endblock %}
+{% block main %}
+        <section>
+        <!-- Home About Start Here -->
+      
+        <!-- Home About End Here -->
+
+        <!-- Single Photo Contest Start Here --> 
+        <div class="home-single-contest pt-90 pb-90 white-bg">
+            <div class="home-single single-photo-contest-area inner">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <div class="section-title">
+                                <h2>Our Running <span>Contests</span></h2>
+                                <p>{{ home.current_contest_description }}</p>
+                            </div>                  
+                            <div class="about-content">
+                                <h2>Running Contests</h2>
+                                <ul class="home-single-slide">
+                                    <!-- <li>
+                                        <div class="item">
+                                            <div class="about-image">
+                                                <img src="{% static 'images/about/4.jpg' %}" alt="">
+                                                <div class="overley">
+                                                    <h4><a href="single-contest1.html">Meet Bird Eye View</a></h4>
+                                                </div>
+                                            </div>
+                                            <div class="about-text">
+                                                <h3><a href="single-contest1.html">New Photo Grapher Contest</a></h3>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt doloremque odit, animi sapiente sunt. Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                                                <div class="countdown-section">
+													<div class="row">
+														<div class="col-sm-11"><div class="CountDownTimer" data-date="2018-04-01 00:00:00"></div></div>
+													</div>
+												</div>
+                                                <a class="radius-0" href="single-contest1.html">Register Now <i class="fa fa-angle-right"></i></a>
+                                            </div> 
+                                        </div>                                       
+                                    </li>
+                                    <li>
+                                        <div class="item">
+                                            <div class="about-image">
+                                                <img src="{% static 'images/about/4.jpg' %}" alt="">
+                                                <div class="overley">
+                                                    <h4><a href="single-contest1.html">Meet Bird Eye View</a></h4>
+                                                </div>
+                                            </div>
+                                            <div class="about-text">
+                                                <h3><a href="single-contest1.html">New Photo Grapher Contest</a></h3>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt doloremque odit, animi sapiente sunt. Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                                                <div class="countdown-section">
+													<div class="row">
+														<div class="col-sm-11"><div class="CountDownTimer" data-date="2018-12-01 00:00:00"></div></div>
+													</div>
+												</div>
+                                                <a class="radius-0" href="single-contest1.html">Register Now <i class="fa fa-angle-right"></i></a>
+                                            </div> 
+                                        </div>                                   
+                                    </li>
+                                    <li>
+                                        <div class="item">
+                                            <div class="about-image">
+                                                <img src="{% static 'images/about/4.jpg' %}" alt="">
+                                                <div class="overley">
+                                                    <h4><a href="single-contest1.html">Meet Bird Eye View</a></h4>
+                                                </div>
+                                            </div>
+                                            <div class="about-text">
+                                                <h3><a href="single-contest1.html">New Photo Grapher Contest</a></h3>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt doloremque odit, animi sapiente sunt. Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>   
+                                                <div class="countdown-section">
+													<div class="row">
+														<div class="col-sm-11"><div class="CountDownTimer" data-date="2018-04-01 00:00:00"></div></div>
+													</div>
+												</div>
+                                                <a class="radius-0" href="single-contest1.html">Register Now <i class="fa fa-angle-right"></i></a>
+                                            </div>  
+                                        </div>                                      
+                                    </li> -->
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+       </div>
+       </section>
+        <!-- Single Photo Contest End Here --> 
+
+        <!-- Services Start -->
+       
+        <!-- Counter Up Section Start Here-->
+        <div class="project-activation-area pt-100 pb-100">
+            <div class="container">
+                <div class="ab-count md-padding-0">
+                    <div class="row">
+                        <!-- ABOUT-COUNTER-LIST START -->
+                        <div class="col-lg-3 col-md-3 col-sm-12 mb-sm-30 wow fadeInUp" data-wow-duration=".3s" data-wow-delay="300ms">
+                            <div class="about-counter-list">
+                                <i class="fa fa-picture-o"></i>
+                                <h1 class="about-counter">10222</h1>                      
+                                <p>Photos</p>
+                            </div>
+                        </div>
+                        <!-- ABOUT-COUNTER-LIST END -->
+                        <!-- ABOUT-COUNTER-LIST START -->
+                        <div class="col-lg-3 col-md-3 col-sm-12 mb-sm-30 wow fadeInUp" data-wow-duration=".7s" data-wow-delay="300ms">
+                            <div class="about-counter-list">
+                                <i class="fa fa-heart"></i>
+                                <h1 class="about-counter">6000</h1>                      
+                                <p>Rated</p>
+                            </div>
+                        </div>
+                        <!-- ABOUT-COUNTER-LIST END -->
+                        <!-- ABOUT-COUNTER-LIST START -->
+                        <div class="col-lg-3 col-md-3 col-sm-12 mb-sm-30 wow fadeInUp" data-wow-duration=".9s" data-wow-delay="300ms">
+                            <div class="about-counter-list">
+                                <i class="fa fa-users"></i>
+                                <h1 class="about-counter">15642</h1>                     
+                                <p>Viewers</p>
+                            </div>
+                        </div>
+                        <!-- ABOUT-COUNTER-LIST END -->
+                        <!-- ABOUT-COUNTER-LIST START -->
+                        <div class="col-lg-3 col-md-3 col-sm-12 wow fadeInUp" data-wow-duration="1.2s" data-wow-delay="300ms">
+                            <div class="about-counter-list">
+                                <i class="fa fa-trophy"></i>
+                                <h1 class="about-counter">97</h1>                        
+                                <p>Winners </p>
+                            </div>
+                        </div>
+                        <!-- ABOUT-COUNTER-LIST END -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Counter Down Section End Here-->
+        <!-- Home Page Shop Start Here -->
+        <section>
+        <div class="related-winners-area home-shop pt-90 pb-90 white-bg">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <div class="section-title">
+                            <h2>Our <span>Shop</span></h2>
+                            <p> {{ home.shop_description }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="home-ralated">
+                    <div class="single-shop-area">
+                        {% quick_shop_tag home %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Home Page Shop End Here -->
+</section>
+<div class="container-fluid acurate">
+            <div class="home-page-core-activities-area">
+                <div class="row acurate">
+                    <div class="col-lg-6 col-md-12 acurate">
+                        <img class="normal" src="{% static 'images/slider/activities-bg.jpg' %}" alt="">
+                        <img class="tablate" src="{% static 'images/slider/activities-bg1.jpg' %}" alt="">
+                    </div>
+                    <div class="col-lg-6 col-md-12 acurate">
+                        <div class="home-activities-area">
+                            <h2>Photo Contest Features</h2>
+                            <div class="single-activities">
+                                <div class="media">
+                                    <div class="pull-left">
+                                        <a href="#">
+                                            <i class="fa fa-camera-retro"></i>
+                                        </a>
+                                    </div>
+                                    <div class="media-body">
+                                        <h4 class="media-heading"><a href="#">Shop Intregated</a></h4>
+                                        <p>Simply dummy text of the printing andrety esetting industry. Lorem Ipsum has beeyan the indust standard unknown.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="single-activities">
+                                <div class="media">
+                                    <div class="pull-left">
+                                        <a href="#">
+                                            <i class="fa fa-pencil-square-o"></i>
+                                        </a>
+                                    </div>
+                                    <div class="media-body">
+                                        <h4 class="media-heading"><a href="#">Photo Editing </a></h4>
+                                        <p>Simply dummy text of the printing andrety esetting industry. Lorem Ipsum has beeyan the indust standard unknown.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="single-activities">
+                                <div class="media">
+                                    <div class="pull-left">
+                                        <a href="#">
+                                            <i class="fa fa-upload"></i>
+                                        </a>
+                                    </div>
+                                    <div class="media-body">
+                                        <h4 class="media-heading"><a href="single-services.html">Images Upload</a></h4>
+                                        <p>Simply dummy text of the printing andrety esetting industry. Lorem Ipsum has beeyan the indust standard unknown.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Home Blog Start Here -->
+        <div class="fix home-blog-area pt-90 pb-90">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="section-title">
+                            <h2>Recent <span>Blog</span> Posts</h2>
+                            <p>{{ home.recent_contest_description }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="blog-slider">
+                    {% include "includes/home/single_recent.html" %}
+                    <!-- <div class="single-blog-slide">
+                        <div class="images">
+                            <a href="single-blog.html"><img src="{% static 'images/blog/2.jpg' %}" alt=""></a>
+                            <span>05 <br/>May</span>
+                            <div class="overley">
+                                <ul>
+                                    <li><a href="single-html.html"><i class="fa fa-eye"></i></a></li>
+                                    <li><a href="{% static 'images/blog/2.jpg' %}" data-lightbox="example-set" data-title="Image Title"><i class="fa fa-search"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="blog-informations">
+                            <ul>
+                                <li><i class="fa fa-user"></i> By Admin</li>
+                                <li><i class="fa fa-comments"></i> 2 Comments</li>
+                            </ul>
+                            <div class="blog-details">
+                                <h3><a href="single-blog.html">Loking After Our Photo Contest</a></h3>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem eligendi culpa modi omnis quos voluptatibus.</p>
+                                <div class="read-more">
+                                    <a href="single-blog.html">Read More</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="single-blog-slide">
+                        <div class="images">
+                            <a href="single-blog.html"><img src="{% static 'images/blog/3.jpg' %}" alt=""></a>
+                            <span>07 <br/>May</span>
+                            <div class="overley">
+                                <ul>
+                                    <li><a href="single-html.html"><i class="fa fa-eye"></i></a></li>
+                                    <li><a href="{% static 'images/blog/3.jpg' %}" data-lightbox="example-set" data-title="Image Title"><i class="fa fa-search"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="blog-informations">
+                            <ul>
+                                <li><i class="fa fa-user"></i> By Admin</li>
+                                <li><i class="fa fa-comments"></i> 2 Comments</li>
+                            </ul>
+                            <div class="blog-details">
+                                <h3><a href="single-blog.html">Loking After Our Photo Contest</a></h3>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem eligendi culpa modi omnis quos voluptatibus.</p>
+                                <div class="read-more">
+                                    <a href="single-blog.html">Read More</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="single-blog-slide">
+                        <div class="images">
+                            <a href="single-blog.html"><img src="{% static 'images/blog/4.jpg' %}" alt=""></a>
+                            <span>10 <br/>May</span>
+                            <div class="overley">
+                                <ul>
+                                    <li><a href="single-html.html"><i class="fa fa-eye"></i></a></li>
+                                    <li><a href="{% static 'images/blog/4.jpg' %}" data-lightbox="example-set" data-title="Image Title"><i class="fa fa-search"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="blog-informations">
+                            <ul>
+                                <li><i class="fa fa-user"></i> By Admin</li>
+                                <li><i class="fa fa-comments"></i> 2 Comments</li>
+                            </ul>
+                            <div class="blog-details">
+                                <h3><a href="single-blog.html">Loking After Our Photo Contest</a></h3>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem eligendi culpa modi omnis quos voluptatibus.</p>
+                                <div class="read-more">
+                                    <a href="single-blog.html">Read More</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+        <!-- Home Blog End Here -->
+
+        <!-- Partner Logo Area Start Here -->
+        <div class="fix client-logo-area pt-90 pb-90">
+            <div class="container">
+                <div class="client-logo">
+                    {% for slide in home.adslides.all %}
+                    {% for slide in home.adslides.all %}
+                    <div class="single-logo">
+                        <a href="#"><img src="{{ MEDIA_URL }}{% thumbnail slide.brand_logo 170 60 %}" alt=""></a>
+                    </div>
+                    {% endfor %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <!-- Partner Logo Area End Here -->
+
+{{ block.super }}
+{% endblock %}
+{% endif %}
+{% endwith %}
+{% endblock all_content %}

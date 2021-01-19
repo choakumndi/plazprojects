@@ -1,0 +1,40 @@
+{% load pages_tags mezzanine_tags i18n staticfiles %}
+        <!--Header area start here-->
+        <header>
+            <div class="header-top-area hidden-sm">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <div class="header-top-left">
+                                <ul>
+                                    <li><i class="fa fa-phone"></i><a href="tel:+985-2356-14566">+985-2356-14566</a></li>
+                                    <li><i class="fa fa-envelope-o"></i><a href="mailto:yourmail@gmail.com">yourmail@gmail.com</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <div class="right-side-tool text-right">
+                                <div class="social-media-area">
+                                    <ul>
+                                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-rss"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-pinterest-p"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                                    </ul>
+                                </div>
+                                <div class="header-top-right">
+                                    <ul>
+                                        {% include "includes/user_area.html" %}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% include "includes/middle_area.html" %}
+        </header>
+        <!--Header area end here-->

@@ -1,0 +1,279 @@
+{% extends "base.html" %}
+{% load i18n mezzanine_tags contest_tags blog_tags keyword_tags disqus_tags %}
+
+{% block meta_title %}{% if page %}{{ page.meta_title }}{% else %}{% trans "Contest" %}{% endif %}{% endblock %}
+
+{% block meta_keywords %}{% metablock %}
+{% keywords_for page as keywords %}
+{% for keyword in keywords %}
+    {% if not forloop.first %}, {% endif %}
+    {{ keyword }}
+{% endfor %}
+{% endmetablock %}{% endblock %}
+
+{% block meta_description %}{% metablock %}
+{{ page.description }}
+{% endmetablock %}{% endblock %}
+
+{% block title %}
+{% if page %}
+{% editable page.title %}{{ page.title }}{% endeditable %}
+{% else %}
+{% trans "Contest" %}
+{% endif %}
+{% endblock %}
+
+{% block breadcrumb_menu %}
+{{ block.super }}
+{% if tag or category or year or month or author %}
+<li>{% spaceless %}
+{% if tag %}
+    {% trans "Tag:" %} {{ tag }}
+{% else %}{% if category %}
+    {% trans "Category:" %} {{ category }}
+{% else %}{% if year or month %}
+    {% if month %}{{ month }}, {% endif %}{{ year }}
+{% else %}{% if author %}
+    {% trans "Author:" %} {{ author.get_full_name|default:author.username }}
+{% endif %}{% endif %}{% endif %}{% endif %}
+{% endspaceless %}
+</li>
+{% endif %}
+{% endblock %}
+
+{% block main %}
+
+{% with blog_posts.object_list as contest_posts  %}
+<div class="blog-page-area home-about-photo-contest-area pt-100 pb-100">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-9 col-md-9 col-sm-12 mb-sm-30">
+                        <div class="row">
+                            {% for contest_post in contest_posts %}
+                            <div class="col-lg-6 col-md-6 col-sm-12 mb-30">
+                
+                                <div class="single-blog-slide">
+                                    {% block blog_post_list_post_featured_image %}
+                                    <div class="images">
+                                        
+                                    <a href="{{ contest_post.get_absolute_url }}">
+                                        <img class="img-thumbnail pull-left" src="{{ MEDIA_URL }}{% thumbnail contest_post.featured_image 370 270 %}">
+                                    </a>
+                                    {% block blog_post_list_post_metainfo %}
+                                        {% editable blog_post.publish_date %}
+                                        <span>{% blocktrans with sometime=contest_post.voting_date %}{{ sometime }} <br> ago{% endblocktrans %}</span>
+                                        {% endeditable %}
+                                        <div class="overley">
+                                            <ul>
+                                                <li><a href="{{ contest_post.get_absolute_url }}"><i class="fa fa-eye"></i></a></li>
+                                                <li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    {% endblock %}
+
+                                    
+                                    <div class="blog-informations">
+                                        <ul>
+                                            <li><i class="fa fa-user"></i>
+                                             
+                                                {% trans "Organised by" %}:
+                                                {% with contest_post.user as author %}
+                                                <a href="{% url "blog_post_list_author" author %}">{{ author.get_full_name|default:author.username }}</a>
+                                                {% endwith %}
+
+                                             </li>
+                                             {% blocktrans with sometime=contest_post.voting_date|timesince %}{{ sometime }} ago{% endblocktrans %}
+                                            {% comment %} <li><i class="fa fa-comments"></i> 2 Comments</li> {% endcomment %}
+                                        </ul>
+                                    {% endblock %}
+                                        <div class="blog-details">
+                                            {% block blog_post_list_post_title %}
+                                            {% editable contest_post.title %}
+                                            <h3><a href="{{ contest_post.get_absolute_url }}">{{ contest_post.title }}</a></h3>
+                                            {% endeditable %}
+                                            <ul id="meta-text">
+                                                <li class="date"><i class="fa fa-calendar-check-o"> From: </i> {% blocktrans with sometime=contest_post.publish_date %}{{ sometime }}{% endblocktrans %}</li>
+                                                <li class="date"><i class="fa fa-calendar-times-o" aria-hidden="true"> To: </i>{% blocktrans with sometime=contest_post.expiry_date %}{{ sometime }}{% endblocktrans %}</li>
+                                            </ul>
+                                            {% endblock %}
+
+                                            {% block blog_post_list_post_content %}
+                                            {% editable contest_post.content %}                                            
+                                            <p>{{ contest_post.description_from_content|safe |truncatechars:200 }}</p>
+                                            {% endeditable %}
+                                            <div class="link-section">
+                                                <a class="read-btn primary-btn mr-10" href="{{ contest_post.get_absolute_url }}">{% trans "See Details" %}</a>
+                                                <a href="registration.html" class="joni-btn primary-btn">{{ contest_post.voting_date|join_or_vote }}</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endblock %}
+                                </div>
+                            </div>
+                            {% endfor %}
+
+
+                            
+
+                            
+
+                            
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-12">
+                        <div class="sidebar-area">
+                            <div class="single-sidebar">
+                                <h2>SEARCH</h2>
+                                <div class="sidebar-search">
+                                    <form action="{% url "search" %}" role="search">
+                                    <input type="text" name="q" value="{{ request.GET.q }}" placeholder="{% trans 'Search Here...' %}">
+                                    <span>
+                                  <button type="submit"><i class="fa fa-search"></i></button> 
+                                </span>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="single-sidebar">
+                                {% blog_recent_posts 5 as recent_contests %}
+                                {% if recent_contests %}
+                                <h2>{% trans "Recent Contest" %}</h2>
+                                <div class="sidebar-recent-post">
+                                    {% for contest in recent_contests  %}
+                                    <div class="media single-post">
+                                        <div class="pull-left">
+                                            <a href="#">
+                                                <img class="media-object" src="{{ MEDIA_URL }}{% thumbnail contest.featured_image 90 90 %}" alt="post">
+                                            </a>
+                                        </div>
+                                        <div class="media-body">
+                                            <div class="posted-date">
+                                                <a href="{{contest.get_absolute_url}}">{{contest.publish_date|timesince}}</a>
+                                            </div>
+                                            {{contest.content|safe|truncatechars:45}}
+                                        </div>
+                                    </div>
+                                      
+                                    {% endfor %}
+                                    
+                                    
+                                    
+                                </div>
+                                  
+                                {% endif %}
+                            </div>
+                            <div class="single-sidebar">
+                                <h2>{% trans "Tags" %}</h2>
+                                <div class="popular-tags">
+                                    <ul>                                        
+                                        {% keywords_for blog.blogpost as tags %}
+                                        {% if tags %}
+                                        {% spaceless %}
+                                        {% for tag in tags %}
+                                        <li><a href="{% url "blog_post_list_tag" tag.slug %}">{{ tag }}</a></li>
+                                        {% endfor %}
+                                        {% endspaceless %}
+                                        {% endif %}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+                        <div class="pagination-area">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+  
+{% endwith %}
+{% comment %} {% if tag or category or year or month or author %}
+    {% block blog_post_list_filterinfo %}
+    <p>
+    {% if tag %}
+        {% trans "Viewing posts tagged" %} {{ tag }}
+    {% else %}{% if category %}
+        {% trans "Viewing posts for the category" %} {{ category }}
+    {% else %}{% if year or month %}
+        {% trans "Viewing posts from" %} {% if month %}{{ month }}, {% endif %}
+        {{ year }}
+    {% else %}{% if author %}
+        {% trans "Viewing posts by" %}
+        {{ author.get_full_name|default:author.username }}
+    {% endif %}{% endif %}{% endif %}{% endif %}
+    {% endblock %}
+    </p>
+{% else %}
+    {% if page %}
+    {% block blog_post_list_pagecontent %}
+    {% if page.get_content_model.content %}
+        {% editable page.get_content_model.content %}
+        {{ page.get_content_model.content|richtext_filters }}
+        {% endeditable %}
+    {% endif %}
+    {% endblock %}
+    {% endif %}
+{% endif %} {% endcomment %}
+
+{% comment %} <h2>
+    
+</h2>
+<h6 class="post-meta">
+    {% with contest_post.categories.all as categories %}
+    {% if categories %}
+    {% trans "in" %}
+    {% for category in categories %}
+    <a href="{% url "blog_post_list_category" category.slug %}">{{ category }}</a>{% if not forloop.last %}, {% endif %}
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+    {% blocktrans with sometime=contest_post.publish_date|timesince %}{{ sometime }} ago{% endblocktrans %}
+</h6> {% endcomment %}
+
+{% comment %} 
+{% block blog_post_list_post_links %}
+<div class="contest-list-detail">
+    {% keywords_for contest_post as tags %}
+    {% if tags %}
+    <ul class="list-inline tags">
+    {% trans "Tags" %}:
+    {% spaceless %}
+    {% for tag in tags %}
+    <li><a href="{% url "blog_post_list_tag" tag.slug %}" class="tag">{{ tag }}</a>{% if not forloop.last %}, {% endif %}</li>
+    {% endfor %}
+    {% endspaceless %}
+    </ul>
+    {% endif %}
+    <p>
+    <a href="{{ contest_post.get_absolute_url }}">{% trans "read more" %}</a>
+    {% if contest_post.allow_comments %}
+    /
+    {% if settings.COMMENTS_DISQUS_SHORTNAME %}
+    <a href="{{ contest_post.get_absolute_url }}#disqus_thread"
+        data-disqus-identifier="{% disqus_id_for contest_post %}">
+        {% trans "Comments" %}
+    </a>
+    {% else %}
+    <a href="{{ contest_post.get_absolute_url }}#comments">
+        {% blocktrans count comments_count=contest_post.comments_count %}{{ comments_count }} comment{% plural %}{{ comments_count }} comments{% endblocktrans %}
+    </a>
+    {% endif %}
+    {% endif %}
+    </p>
+</div>
+{% endblock %}
+{% endfor %}
+
+
+{% if settings.COMMENTS_DISQUS_SHORTNAME %}
+{% include "generic/includes/disqus_counts.html" %}
+{% endif %}
+
+{% endblock %}
+
+{% block right_panel %}
+{% include "contest/includes/filter_panel.html" %} {% endcomment %}
+{% endblock %}
